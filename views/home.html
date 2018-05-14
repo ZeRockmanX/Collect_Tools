@@ -31,14 +31,23 @@
     <div class="panel panel-default" >
         <div class="panel-heading" style="height: 40px;">
                     <div style="text-align: left">
-                        <span style="font-size:20px; font-weight:bold;">商品展示页</span>
+                        <span style="font-size:20px; font-weight:bold;">Dash Board</span>
                         <div style="float: right;">
-                            <a class="btn  btn-xs btn-success" href="addcommodity" style="margin-right: 35px;">添加商品</a>
-                            <a class="btn  btn-xs btn-success" href="cart" style="margin-right: 35px;">购物车</a>
-                            <a class="btn btn-xs btn-info" href="logout">退 出</a>
+                            <!--<a class="btn  btn-xs btn-success" href="addcommodity" style="margin-right: 35px;">添加商品</a>-->
+                            <!--<a class="btn  btn-xs btn-success" href="cart" style="margin-right: 35px;">购物车</a>-->
+                            <a class="btn btn-xs btn-info" href="logout">Exit</a>
                         </div>
                     </div>
                 </div>
+        <div class="panel-body">
+            <div><a href="/api?action=collectComments&id=1727">Collect Comments</a></div>
+            <div><a href="/api?action=getComments&id=1727">Show Comments</a></div>
+            <div><a href="/api?action=clear">Clear</a></div>
+            <br />
+        </div>
+        <div class="panel-body">
+            <div><%=message %></div>
+        </div>
         <div class="panel-body">
             <ul class="spys" >
                 <%for(var i in Commoditys){ if(!Commoditys[i].name)continue;%>
