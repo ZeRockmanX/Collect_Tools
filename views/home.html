@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>主页</title>
+    <title>TopPage</title>
 	<meta charset="utf-8">
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
       <script src="/javascripts/jquery-2.1.1.min.js" type="text/javascript"></script>
@@ -46,8 +46,9 @@
             <br />
         </div>
         <div class="panel-body">
-            <div><%=message %></div>
+            <div><%= spiderMessage %></div>
         </div>
+        <!--
         <div class="panel-body">
             <ul class="spys" >
                 <%for(var i in Commoditys){ if(!Commoditys[i].name)continue;%>
@@ -66,6 +67,7 @@
                 <%}%>
             </ul>
         </div>
+        -->
     </div>
 </div>
 </body>

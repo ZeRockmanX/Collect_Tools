@@ -3,10 +3,10 @@ module.exports = function ( app ) {
         if(req.session.user){
             var Commodity = global.dbHelper.getModel('commodity');
             Commodity.find({}, function (error, docs) {
-                res.render('home',{Commoditys:null});
+                res.render('home',{spiderMessage: null,Commoditys:null});
             });
         }else{
-            req.session.error = "请先登录"
+            req.session.error = "login again";
             res.redirect('/login');
         }
     });
@@ -46,12 +46,12 @@ module.exports = function ( app ) {
         });
         switch (action) {
             case "clear":
-                response.render('home', {title: 'Spider', message: null,Commoditys:null});
+                response.render('home', {title: 'Spider', spiderMessage: null,Commoditys:null});
                 break;
             case "getComments":
                 article_id = request.query.id;
                 let resData = await apiFunc.getById(article_id);
-                response.render('home', {title: 'Spider', message: JSON.stringify(resData),Commoditys:null});
+                response.render('home', {title: 'Spider', spiderMessage: JSON.stringify(resData),Commoditys:null});
                 break;
             case "collectComments":
                 article_id = request.query.id;
@@ -59,11 +59,11 @@ module.exports = function ( app ) {
                     let itemUrl = baseUrl + article_id + "/";
                     await apiFunc.collectById(itemUrl, article_id);
                     console.log("ok");
-                    response.render('home', {title: 'Spider', message: 'collect Comments success',Commoditys:null});
+                    response.render('home', {title: 'Spider', spiderMessage: 'collect Comments success',Commoditys:null});
                 } catch (error) {
                     console.log("collectComments error:");
                     console.log(error);
-                    response.render('home', {title: 'Spider', message: 'collect Comments failed',Commoditys:null});
+                    response.render('home', {title: 'Spider', spiderMessage: 'collect Comments failed',Commoditys:null});
                 }
                 break;
             default:

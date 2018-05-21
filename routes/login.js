@@ -11,11 +11,11 @@ module.exports = function ( app ) {
                 res.sendStatus(500);
                 console.log(error);
             } else if (!doc) {
-                req.session.error = '用户名不存在！';
+                req.session.error = 'Not exist username';
                 res.sendStatus(404);
             } else {
                if(req.body.upwd != doc.password){
-                   req.session.error = "密码错误!";
+                   req.session.error = "Password error";
                    res.sendStatus(404);
                }else{
                    req.session.user=doc;
