@@ -55,6 +55,6 @@ app.get('/', function(req, res) {
     res.render('login');
 });
 
-let port = 3300;
+let port = 3000;
 app.listen(port);
 console.log('Server starting please access http://localhost:' + port);
