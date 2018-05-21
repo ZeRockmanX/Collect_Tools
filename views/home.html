@@ -6,6 +6,8 @@
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
       <script src="/javascripts/jquery-2.1.1.min.js" type="text/javascript"></script>
       <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
+      <script src="/javascripts/vis.js"></script>
+      <link href="/stylesheets/vis.css" rel="stylesheet" type="text/css" />
 		<style type="text/css">
 			.panel-title{
 				font-size: 24px;
@@ -41,13 +43,33 @@
                 </div>
         <div class="panel-body">
             <div><a href="/api?action=collectComments&id=1727">Collect Comments</a></div>
-            <div><a href="/api?action=getComments&id=1727">Show Comments</a></div>
+            <div><a href="/api?action=chart">Chart</a></div>
+            <div><a href="/api?action=getComments&id=1727">DB</a></div>
             <div><a href="/api?action=clear">Clear</a></div>
             <br />
         </div>
         <div class="panel-body">
             <div><%= spiderMessage %></div>
         </div>
+
+        <%if (flag==true) { %>
+        <div id="visualization"></div>
+
+        <script type="text/javascript">
+            var container = document.getElementById('visualization');
+            var items = <%- JSON.stringify(items); %>;
+
+            var dataset = new vis.DataSet(items);
+            var options = {
+                moveable: false,
+                showCurrentTime: false,
+                drawPoints: { style: 'circle' },
+                interpolation: false,
+                dataAxis: { showMinorLabels: false, },
+            };
+            var Graph2d = new vis.Graph2d(container, dataset, options);
+        </script>
+        <% } %>
         <!--
         <div class="panel-body">
             <ul class="spys" >
