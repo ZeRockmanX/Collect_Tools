@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Demo Chart 1
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/vis.js"></script>
+  <link href="/vis.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="visualization"></div>
+
+  <script type="text/javascript">
+    var container = document.getElementById('visualization');
+    var items = <%- JSON.stringify(items); %>;
+
+    var dataset = new vis.DataSet(items);
+    var options = {
+      moveable: false,
+      showCurrentTime: false,
+      drawPoints: { style: 'circle' },
+      interpolation: false,
+      dataAxis: { showMinorLabels: false, },
+    };
+    var Graph2d = new vis.Graph2d(container, dataset, options);
+  </script>
+</body>
+
+</html>
