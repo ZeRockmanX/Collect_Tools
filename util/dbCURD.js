@@ -85,7 +85,7 @@ module.exports = {
                         resolve();
                     }
                 });
-                console.log("Drop collection " + collectionPrefixion + article_id + "execute success");
+                console.log("Drop collection " + collectionPrefixion + article_id + " execute success");
             });
         });
     }

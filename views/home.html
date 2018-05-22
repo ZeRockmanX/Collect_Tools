@@ -42,7 +42,7 @@
                     </div>
                 </div>
         <div class="panel-body">
-            <label>Store Id : </label><input class="form-control" value=<%= defaultID %> id="StoreID" placeholder="1727" style="IME-MODE: disabled; onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="10" name="collect" type="text" />
+            <label>Article Id : </label><input class="form-control" value=<%= defaultID %> id="ArticleID" placeholder="1727" style="IME-MODE: disabled; onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="10" name="collect" type="text" />
             <br/>
             <input class="btn btn-default btn-block" type="button" onclick="collectComments()" value="Collect Comments" />
             <input class="btn btn-default btn-block" type="button" onclick="asyncCollectComments()" value="Async Collect Comments" />
@@ -59,28 +59,28 @@
         <script type="text/javascript">
             function collectComments()
             {
-                var StoreID = document.getElementById("StoreID").value;
-                window.location.href="/api?action=collectComments&id="+StoreID;
+                var ArticleID = document.getElementById("ArticleID").value;
+                window.location.href="/api?action=collectComments&id="+ArticleID;
             }
             function asyncCollectComments()
             {
-                var StoreID = document.getElementById("StoreID").value;
-                window.location.href="/api?action=asyncCollectComments&id="+StoreID;
+                var ArticleID = document.getElementById("ArticleID").value;
+                window.location.href="/api?action=asyncCollectComments&id="+ArticleID;
             }
             function chart()
             {
-                var StoreID = document.getElementById("StoreID").value;
-                window.location.href="/api?action=chart&id="+StoreID;
+                var ArticleID = document.getElementById("ArticleID").value;
+                window.location.href="/api?action=chart&id="+ArticleID;
             }
             function getComments()
             {
-                var StoreID = document.getElementById("StoreID").value;
-                window.location.href="/api?action=getComments&id="+StoreID;
+                var ArticleID = document.getElementById("ArticleID").value;
+                window.location.href="/api?action=getComments&id="+ArticleID;
             }
             function deleteStoreData()
             {
-                var StoreID = document.getElementById("StoreID").value;
-                window.location.href="/api?action=deleteStoreData&id="+StoreID;
+                var ArticleID = document.getElementById("ArticleID").value;
+                window.location.href="/api?action=deleteStoreData&id="+ArticleID;
             }
         </script>
 
