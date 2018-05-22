@@ -67,6 +67,27 @@ module.exports = {
                 db.close();
             });
         });
+    },
+    deleteStoreData: function select(article_id) {
+        return new Promise(async function (resolve, reject) {
+            MongoClient.connect(dbUrl, async function (err, db) {
+                if (err) {
+                    throw err;
+                } else {
+                    var dbo = db.db(dbName);
+                }
+                //先创建后删除（防止删除操作报错），如果已有合集存在则忽略，也可替换为查找书否存在合集（exist函数已废除，无法使用）
+                await dbo.createCollection(collectionPrefixion + article_id);
+                await dbo.collection(collectionPrefixion + article_id).drop(function (err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+                console.log("Drop collection " + collectionPrefixion + article_id + "execute success");
+            });
+        });
     }
 };
 

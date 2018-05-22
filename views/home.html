@@ -42,14 +42,47 @@
                     </div>
                 </div>
         <div class="panel-body">
-            <a  class="btn btn-default btn-block" href="/api?action=collectComments&id=1727">Collect Comments</a>
-            <a class="btn btn-default btn-block"  href="/api?action=chart">Chart</a>
-            <a class="btn btn-default btn-block"  href="/api?action=getComments&id=1727">DB</a>
+            <label>Store Id : </label><input class="form-control" value=<%= defaultID %> id="StoreID" placeholder="1727" style="IME-MODE: disabled; onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="10" name="collect" type="text" />
+            <br/>
+            <input class="btn btn-default btn-block" type="button" onclick="collectComments()" value="Collect Comments" />
+            <input class="btn btn-default btn-block" type="button" onclick="asyncCollectComments()" value="Async Collect Comments" />
+            <input class="btn btn-default btn-block" type="button" onclick="chart()" value="Chart" />
+            <input class="btn btn-default btn-block" type="button" onclick="getComments()" value="Comments Informations" />
+            <input class="btn btn-default btn-block" type="button" onclick="deleteStoreData()" value="Delete Comments By Store ID" />
             <a class="btn btn-default btn-block"  href="/api?action=clear">Clear</a>
         </div>
         <div class="panel-body">
             <div><%= spiderMessage %></div>
         </div>
+
+
+        <script type="text/javascript">
+            function collectComments()
+            {
+                var StoreID = document.getElementById("StoreID").value;
+                window.location.href="/api?action=collectComments&id="+StoreID;
+            }
+            function asyncCollectComments()
+            {
+                var StoreID = document.getElementById("StoreID").value;
+                window.location.href="/api?action=asyncCollectComments&id="+StoreID;
+            }
+            function chart()
+            {
+                var StoreID = document.getElementById("StoreID").value;
+                window.location.href="/api?action=chart&id="+StoreID;
+            }
+            function getComments()
+            {
+                var StoreID = document.getElementById("StoreID").value;
+                window.location.href="/api?action=getComments&id="+StoreID;
+            }
+            function deleteStoreData()
+            {
+                var StoreID = document.getElementById("StoreID").value;
+                window.location.href="/api?action=deleteStoreData&id="+StoreID;
+            }
+        </script>
 
         <%if (flag==true) { %>
         <div id="visualization"></div>

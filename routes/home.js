@@ -4,7 +4,7 @@ module.exports = function (app) {
         if (req.session.user) {
             var Commodity = global.dbHelper.getModel('commodity');
             Commodity.find({}, function (error, docs) {
-                res.render('home', {spiderMessage: null, Commoditys: null, items: null, flag: null});
+                res.render('home', {spiderMessage: null, Commoditys: null, items: null, flag: null,defaultID:1727});
             });
         } else {
             req.session.error = "login again";
@@ -51,13 +51,15 @@ module.exports = function (app) {
                     spiderMessage: null,
                     Commoditys: null,
                     items: null,
-                    flag: null
+                    flag: null,
+                    defaultID:1727
                 });
                 break;
             case "chart":
+                article_id = request.query.id;
                 MongoClient.connect('mongodb://localhost:27017').then((client) => {
                     let dateMap = {};
-                    client.db('spider_rakuten').collection('Article_1727').find().forEach((doc) => {
+                    client.db('spider_rakuten').collection('Article_'+article_id).find().forEach((doc) => {
                         if (dateMap[doc.reviewDate]) {
                             dateMap[doc.reviewDate] += 1;
                         } else {
@@ -76,7 +78,8 @@ module.exports = function (app) {
                             title: 'Spider',
                             spiderMessage: null,
                             Commoditys: null,
-                            flag: true
+                            flag: true,
+                            defaultID:article_id
                         });
 
                     });
@@ -90,7 +93,8 @@ module.exports = function (app) {
                     spiderMessage: JSON.stringify(resData),
                     Commoditys: null,
                     items: null,
-                    flag: false
+                    flag: false,
+                    defaultID:article_id
                 });
                 break;
             case "collectComments":
@@ -104,7 +108,8 @@ module.exports = function (app) {
                         spiderMessage: 'collect Comments success',
                         Commoditys: null,
                         items: null,
-                        flag: null
+                        flag: null,
+                        defaultID:article_id
                     });
                 } catch (error) {
                     console.log("collectComments error:");
@@ -114,9 +119,49 @@ module.exports = function (app) {
                         spiderMessage: 'collect Comments failed',
                         Commoditys: null,
                         items: null,
-                        flag: null
+                        flag: null,
+                        defaultID:article_id
                     });
                 }
+                break;
+            case "asyncCollectComments":
+                article_id = request.query.id;
+                try {
+                    let itemUrl = baseUrl + article_id + "/";
+                    await apiFunc.asyncCollectById(itemUrl, article_id);
+                    console.log("ok");
+                    response.render('home', {
+                        title: 'Spider',
+                        spiderMessage: 'collect Comments success',
+                        Commoditys: null,
+                        items: null,
+                        flag: null,
+                        defaultID:article_id
+                    });
+                } catch (error) {
+                    console.log("collectComments error:");
+                    console.log(error);
+                    response.render('home', {
+                        title: 'Spider',
+                        spiderMessage: 'collect Comments failed',
+                        Commoditys: null,
+                        items: null,
+                        flag: null,
+                        defaultID:article_id
+                    });
+                }
+                break;
+            case "deleteStoreData":
+                article_id = request.query.id;
+                await apiFunc.deleteStoreData(article_id);
+                response.render('home', {
+                    title: 'Spider',
+                    spiderMessage: 'Execute success',
+                    Commoditys: null,
+                    items: null,
+                    flag: false,
+                    defaultID:article_id
+                });
                 break;
             default:
         }
